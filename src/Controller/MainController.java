@@ -13,7 +13,7 @@ public class MainController extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("PROG4 ASS Snake Ody Chen");
-		primaryStage.setScene(new GameScene());
+		primaryStage.setScene(new GameScene(new GameController()));
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}

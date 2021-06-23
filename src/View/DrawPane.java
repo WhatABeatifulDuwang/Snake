@@ -1,7 +1,14 @@
 package View;
 
-public class DrawPane {
+import Controller.GameController;
+import javafx.scene.layout.GridPane;
 
+public class DrawPane extends GridPane{
+
+	public DrawPane(GameController controller) {
+		
+	}
+	
 	public void draw() {
 		
 	}
