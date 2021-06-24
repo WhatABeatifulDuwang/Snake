@@ -2,18 +2,18 @@ package Model;
 
 public class Snake {
 
-	private BodyPart body;
+	private BodyPart[] body;
 	private int[][] position;
 	
 	public Snake() {
 		
 	}
 	
-	public BodyPart getBody() {
+	public BodyPart[] getBody() {
 		return body;
 	}
 	
-	public void setBody(BodyPart body) {
+	public void setBody(BodyPart[] body) {
 		this.body = body;
 	}
 	

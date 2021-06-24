@@ -1,8 +1,6 @@
 package View;
 
 import Controller.GameController;
-import Controller.Timer;
-import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,7 +12,7 @@ import javafx.scene.layout.HBox;
 public class DashBoard extends HBox{
 
 	private final static int PREFWIDTH = 760;
-	private final static int PREFHEIGHT = 600;
+	private final static int PREFHEIGHT = 50;
 	private final static int SLIDERMIN = 1;
 	private final static int SLIDERMAX = 12;
 	private final static int SPACING = 20;
@@ -71,7 +69,6 @@ public class DashBoard extends HBox{
 	
 	public void createPlaytimeLabel() {
 		Label label = new Label("Timer");
-		
 		this.getChildren().add(label);
 	}
 	

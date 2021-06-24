@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.BodyPart;
+import Model.Game;
+import Model.Marker;
 import View.DashBoard;
 import View.DrawPane;
 import View.GameOverScene;
@@ -11,6 +14,7 @@ public class GameController {
 	private DashBoard setting;
 	private GameOverScene endScreen;
 	private AnimationTimer timer;
+	private Game game;
 	
 	public GameController() {
 		board = new DrawPane(this);
@@ -19,6 +23,7 @@ public class GameController {
 	}
 	
 	public void startGame() {
+		createTimer();
 		startTimer();
 	}
 	
@@ -48,6 +53,22 @@ public class GameController {
 		timer.start();
 	}
 	
+	public void checkSpot() {
+		if (getGame().getSpot().getMarker() == Marker.FIRE) {
+			// Switch to gameoverscene
+		}
+		else if (getGame().getSpot().getMarker() == Marker.BEAR) {
+			Math.floor(getGame().getSnake().getBody().length);
+			if (getGame().getSnake().getBody().length < 5) {
+				// Switch to gameoverscene
+			}
+		}
+		else if (getGame().getSpot().getMarker() == Marker.MOUSE) {
+			getGame().getSnake().setBody(new BodyPart[5]);
+			// dit maal 5
+		}
+	}
+	
 	public DrawPane getBoard() {
 		return board;
 	}
@@ -62,5 +83,9 @@ public class GameController {
 	
 	public AnimationTimer getTimer() {
 		return timer;
+	}
+	
+	public Game getGame() {
+		return game;
 	}
 }
