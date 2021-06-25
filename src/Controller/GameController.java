@@ -29,15 +29,10 @@ public class GameController {
 	public void startGame() {
 		engine.start();
 		move(Direction.RIGHT);
-		//createTimer();
-		//startTimer();
 	}
 	
 	public void pauseGame() {
 		engine.stop();
-		System.out.println("pause");						
-		
-		//pauseTimer();
 	}
 	
 	public void increaseSpeed(int speed) {
