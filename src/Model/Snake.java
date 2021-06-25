@@ -8,6 +8,7 @@ public class Snake {
 	private BodyPart[] body;
 	private int positionX;
 	private int positionY;
+	private int speed;
 	
 	public Snake() {
 		positionX = DEFAULT_START_X;
@@ -29,6 +30,14 @@ public class Snake {
 	
 	public void setBody(BodyPart[] body) {
 		this.body = body;
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 	
 	public void setX(int positionX) {

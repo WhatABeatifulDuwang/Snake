@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.BodyPart;
+import Model.Direction;
 import Model.Game;
 import Model.Marker;
 import View.DashBoard;
@@ -15,10 +16,7 @@ public class GameController {
 	private GameOverScene endScreen;
 	
 	private GameEngine engine;
-	private AnimationTimer timer;
 	private Game game;
-	
-	private boolean running;
 	
 	public GameController() {
 		game = new Game();
@@ -30,7 +28,7 @@ public class GameController {
 	
 	public void startGame() {
 		engine.start();
-
+		move(Direction.RIGHT);
 		//createTimer();
 		//startTimer();
 	}
@@ -42,26 +40,27 @@ public class GameController {
 		//pauseTimer();
 	}
 	
-	public void increaseSpeed() {
-		
+	public void increaseSpeed(int speed) {
+		engine.setSpeed(speed);
 	}
 	
-	public void createTimer() {
-		timer = new Timer(1000) {
-			
-			@Override
-			public void doAction() {
-				increaseSpeed();
-			}
-		};	
-	}
-	
-	public void pauseTimer() {
-		timer.stop();
-	}
-	
-	public void startTimer() {
-		timer.start();
+	public void move(Direction direction) {
+		int currentPosX = getGame().getSnake().getX();
+		int currentPosY = getGame().getSnake().getY();
+		switch(direction) {
+		case UP:
+			getGame().getSnake().setY(currentPosY++);
+			break;
+		case RIGHT:
+			getGame().getSnake().setY(currentPosX++);
+			break;
+		case DOWN:
+			getGame().getSnake().setY(currentPosY--);
+			break;
+		case LEFT:
+			getGame().getSnake().setY(currentPosX--);
+			break;
+		}
 	}
 	
 	public void checkSpot() {
@@ -90,10 +89,6 @@ public class GameController {
 	
 	public GameOverScene getEndScreen() {
 		return endScreen;
-	}
-	
-	public AnimationTimer getTimer() {
-		return timer;
 	}
 	
 	public Game getGame() {

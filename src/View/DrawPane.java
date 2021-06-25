@@ -25,8 +25,11 @@ public class DrawPane extends GridPane{
 	private final int CIRCLESIZE = 20;
     private final int CIRCLE_X = (PREFWIDTH - CIRCLESIZE) / 2;
     private final int CIRCLE_Y = (PREFHEIGHT - CIRCLESIZE) / 2;
+    
+    private GameController controller;
 	
 	public DrawPane(GameController controller) {
+		this.controller = controller;
 		this.setPrefSize(PREFWIDTH, PREFHEIGHT);
 		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
 		//Canvas canvas = new Canvas(PREFWIDTH * 25, PREFHEIGHT * 25);
@@ -69,17 +72,21 @@ public class DrawPane extends GridPane{
 	
 	private void checkDirection(Snake snake) {
 		this.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
-			if (key.getCode() == KeyCode.UP) {
+			if (key.getCode() == KeyCode.W) {
 				snake.getBody()[0].setDirection(Direction.UP);
+				controller.move(Direction.UP);
 			}
-			if (key.getCode() == KeyCode.RIGHT) {
+			if (key.getCode() == KeyCode.D) {
 				snake.getBody()[0].setDirection(Direction.RIGHT);
+				controller.move(Direction.RIGHT);
 			}
-			if (key.getCode() == KeyCode.DOWN) {
+			if (key.getCode() == KeyCode.S) {
 				snake.getBody()[0].setDirection(Direction.DOWN);
+				controller.move(Direction.DOWN);
 			}
-			if (key.getCode() == KeyCode.LEFT) {
+			if (key.getCode() == KeyCode.A) {
 				snake.getBody()[0].setDirection(Direction.LEFT);
+				controller.move(Direction.LEFT);
 			}
 		});
 	}

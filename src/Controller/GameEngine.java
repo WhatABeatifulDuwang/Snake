@@ -12,7 +12,7 @@ public class GameEngine implements Runnable {
 	private DrawPane view;
 
 	private boolean isRunning;
-	private final static int INTERVAL = 2000;
+	private int interval = 2000;
 
 	public GameEngine(Game game, DrawPane view) {
 		this.game = game;
@@ -24,7 +24,7 @@ public class GameEngine implements Runnable {
 		isRunning = true;
 		while (isRunning) {
 			try {
-				Thread.sleep(INTERVAL);
+				Thread.sleep(interval);
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
@@ -48,5 +48,9 @@ public class GameEngine implements Runnable {
 
 	public void stop() {
 		isRunning = false;
+	}
+	
+	public void setSpeed(int speed) {
+		interval = interval - (speed * 10);
 	}
 }
