@@ -6,7 +6,7 @@ public class Game {
 	private Spot spot;
 	
 	public Game() {
-		
+		snake = new Snake();
 	}
 	
 	public Snake getSnake() {

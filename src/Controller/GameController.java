@@ -13,22 +13,33 @@ public class GameController {
 	private DrawPane board;
 	private DashBoard setting;
 	private GameOverScene endScreen;
+	
+	private GameEngine engine;
 	private AnimationTimer timer;
 	private Game game;
 	
+	private boolean running;
+	
 	public GameController() {
+		game = new Game();
 		board = new DrawPane(this);
 		setting = new DashBoard(this);
 		endScreen = new GameOverScene(this);
+		engine = new GameEngine(game, board);
 	}
 	
 	public void startGame() {
-		createTimer();
-		startTimer();
+		engine.start();
+
+		//createTimer();
+		//startTimer();
 	}
 	
 	public void pauseGame() {
-		pauseTimer();
+		engine.stop();
+		System.out.println("pause");						
+		
+		//pauseTimer();
 	}
 	
 	public void increaseSpeed() {

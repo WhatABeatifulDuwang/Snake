@@ -21,6 +21,7 @@ public class DashBoard extends HBox{
 	private GameController controller;
 	
 	public DashBoard(GameController controller) {
+		this.controller = controller;
 		this.setPrefSize(PREFWIDTH, PREFHEIGHT);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(SPACING);
@@ -43,7 +44,7 @@ public class DashBoard extends HBox{
 		if (run.getText().equals("Start")) {
 			controller.startGame();
 			run.setText("Pause");			
-		} else {
+		} else if (run.getText().equals("Pause")) {
 			controller.pauseGame();
 			run.setText("Start");
 		}
