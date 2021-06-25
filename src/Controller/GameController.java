@@ -7,7 +7,6 @@ import Model.Marker;
 import View.DashBoard;
 import View.DrawPane;
 import View.GameOverScene;
-import javafx.animation.AnimationTimer;
 
 public class GameController {
 
@@ -29,15 +28,10 @@ public class GameController {
 	public void startGame() {
 		engine.start();
 		move(Direction.RIGHT);
-		//createTimer();
-		//startTimer();
 	}
 	
 	public void pauseGame() {
 		engine.stop();
-		System.out.println("pause");						
-		
-		//pauseTimer();
 	}
 	
 	public void increaseSpeed(int speed) {
