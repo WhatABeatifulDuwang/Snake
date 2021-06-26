@@ -9,6 +9,10 @@ public class Game {
 		snake = new Snake();
 	}
 	
+	public void update() {
+		snake.move();
+	}
+	
 	public Snake getSnake() {
 		return snake;
 	}

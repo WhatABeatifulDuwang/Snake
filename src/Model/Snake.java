@@ -1,11 +1,16 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Snake {
 
-	private final int DEFAULT_START_X = 4;
+	private final int DEFAULT_START_X = 8;
 	private final int DEFAULT_START_Y = 6;
-	private final int BODY_COUNT = 5;
-	private BodyPart[] body;
+	
+	private ArrayList<BodyPart> body;
+	private Direction direction;
+	
+	private int amountOfBodyParts;
 	private int positionX;
 	private int positionY;
 	private int speed;
@@ -13,7 +18,46 @@ public class Snake {
 	public Snake() {
 		positionX = DEFAULT_START_X;
 		positionY = DEFAULT_START_Y;
-		body = new BodyPart[BODY_COUNT]; 
+		direction = Direction.RIGHT;
+		amountOfBodyParts = 4;
+		body = new ArrayList<BodyPart>(); 
+		
+		for (int i = 0; i <= amountOfBodyParts; i++) {			
+			BodyPart startPart = new BodyPart();
+			startPart.setPositionX(positionX - i); 
+			startPart.setPositionY(positionY);
+			startPart.setDirection(Direction.RIGHT);
+			body.add(startPart);
+		}
+	}
+	
+	public void move() {
+		
+		switch(direction) {
+		case UP:
+			positionY--;			
+			moveBody(positionX, positionY + 1);
+			break;
+		case RIGHT:
+			positionX++;
+			moveBody(positionX - 1, positionY);
+			break;
+		case DOWN:
+			positionY++;
+			moveBody(positionX, positionY - 1);
+			break;
+		case LEFT:
+			positionX--;
+			moveBody(positionX + 1, positionY);
+			break;
+		}
+	}
+	
+	public void moveBody(int x, int y) {
+		for (int i = 0; i <= amountOfBodyParts; i++) {				
+			body.get(i).setPositionX(x);
+			body.get(i).setPositionY(y);
+		}
 	}
 	
 	public boolean isHead(int x, int y) {
@@ -24,12 +68,14 @@ public class Snake {
 		return false;
 	}
 	
-	public BodyPart[] getBody() {
-		return body;
-	}
-	
-	public void setBody(BodyPart[] body) {
-		this.body = body;
+	public BodyPart getBodyPart(int x, int y) {
+		for (int i = 0; i < body.size(); i++) {
+			if (body.get(i).isPosition(x, y)) {
+				return body.get(i);
+			}
+		}
+		
+		return null;
 	}
 	
 	public int getSpeed() {
@@ -54,5 +100,28 @@ public class Snake {
 	
 	public int getY() {
 		return positionY;
+	}
+	
+	public Direction getDirection() {
+		return direction;
+	}
+	
+	public void setDirection(Direction direction) {
+		switch(direction) {
+		case UP:
+			this.direction = Direction.UP;
+			break;
+		case RIGHT:
+			this.direction = Direction.RIGHT;
+			break;
+		case DOWN:
+			this.direction = Direction.DOWN;
+			break;
+		case LEFT:
+			this.direction = Direction.LEFT;
+			break;
+		default:
+			break;
+		}
 	}
 }

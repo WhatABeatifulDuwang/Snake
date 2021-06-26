@@ -10,13 +10,15 @@ public class GameEngine implements Runnable {
 
 	private Game game;
 	private DrawPane view;
+	private GameController controller;
 
 	private boolean isRunning;
-	private int interval = 2000;
+	private int interval = 1000;
 
-	public GameEngine(Game game, DrawPane view) {
+	public GameEngine(Game game, DrawPane view, GameController controller) {
 		this.game = game;
 		this.view = view;
+		this.controller = controller;
 	}
 
 	@Override
@@ -28,6 +30,7 @@ public class GameEngine implements Runnable {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
+						game.update();
 						view.update(game);
 					}
 				});

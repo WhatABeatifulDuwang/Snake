@@ -2,6 +2,7 @@ package Controller;
 
 import View.GameScene;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainController extends Application{
@@ -13,7 +14,8 @@ public class MainController extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("PROG4 ASS Snake Ody Chen");
-		primaryStage.setScene(new GameScene(new GameController()));
+		Scene scene = new GameScene(new GameController());
+		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}

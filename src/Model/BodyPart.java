@@ -2,19 +2,33 @@ package Model;
 
 public class BodyPart {
 
-	private int[][] position;
 	private Direction direction;
+	
+	private int positionX;
+	private int positionY;
 	
 	public BodyPart() {
 		
 	}
 	
-	public int[][] getPosition() {
-		return position;
+	public int getPositionX() {
+		return positionX;
 	}
-	
-	public void setPosition(int[][] position) {
-		this.position = position;
+
+	public void setPositionX(int positionX) {
+		this.positionX = positionX;
+	}
+
+	public int getPositionY() {
+		return positionY;
+	}
+
+	public void setPositionY(int positionY) {
+		this.positionY = positionY;
+	}
+
+	public boolean isPosition(int x, int y) {
+		return positionX == x && positionY == y; 
 	}
 	
 	public Direction getDirection() {
