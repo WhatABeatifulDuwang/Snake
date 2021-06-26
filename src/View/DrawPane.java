@@ -3,7 +3,11 @@ package View;
 import Controller.GameController;
 import Model.BodyPart;
 import Model.Game;
+import Model.Marker;
 import Model.Snake;
+import Model.Spot;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -38,6 +42,7 @@ public class DrawPane extends GridPane{
 				if (game != null) {
 					drawSnakeHead(game.getSnake(), x, y);					
 					drawSnakeBodyPart(game.getSnake().getBodyPart(x, y), x, y);
+					drawRandomSpot(game.getSpot());
 				}				
 			}
 		}
@@ -65,6 +70,23 @@ public class DrawPane extends GridPane{
 		Circle bodyPart = new Circle(CIRCLE_X, CIRCLE_Y, CIRCLESIZE);
 		bodyPart.setFill(Color.YELLOW);			
 		this.add(bodyPart, x, y);
+	}
+	
+	private void drawRandomSpot(Spot spot) {
+		if (spot == null) return;
+		
+		ImageView randomSpot = new ImageView();
+		if (spot.getMarker() == Marker.FIRE) {
+			randomSpot.setImage(new Image("/Resources/images/fire.png"));
+		}
+		if (spot.getMarker() == Marker.BEAR) {
+			randomSpot.setImage(new Image("/Resources/images/bear.png"));
+		}
+		if (spot.getMarker() == Marker.MOUSE) {
+			randomSpot.setImage(new Image("/Resources/images/mouse.png"));
+		}
+		
+		this.add(randomSpot, spot.getPositionX(), spot.getPositionY());
 	}
 	
 	private void drawEmptyCell(int x, int y) {

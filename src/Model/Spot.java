@@ -1,20 +1,42 @@
 package Model;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public class Spot {
 
-	private int[][] position;
+	private final int MAX_X = 19;
+	private final int MAX_Y = 15;
+	private final List<Marker> TYPES = Collections.unmodifiableList(Arrays.asList());
+	
 	private Marker marker;
+	private Random random;
 	
-	public Spot(int[][] position, Marker marker) {
-		
+	private int positionX;
+	private int positionY;
+	
+	public Spot() {
+		positionX = random.nextInt(MAX_X);
+		positionY = random.nextInt(MAX_Y);
+		marker = TYPES.get(random.nextInt(TYPES.size()));
 	}
 	
-	public int[][] getPosition() {
-		return position;
+	public int getPositionX() {
+		return positionX;
 	}
-	
-	public void setPosition(int[][] position) {
-		this.position = position;
+
+	public void setPositionX(int positionX) {
+		this.positionX = positionX;
+	}
+
+	public int getPositionY() {
+		return positionY;
+	}
+
+	public void setPositionY(int positionY) {
+		this.positionY = positionY;
 	}
 	
 	public Marker getMarker() {

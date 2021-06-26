@@ -34,34 +34,16 @@ public class GameController {
 		engine.setSpeed(speed);
 	}
 	
-	
-//	
-//	public void checkSpot() {
-//		if (getGame().getSpot().getMarker() == Marker.FIRE) {
-//			// Switch to gameoverscene
-//		}
-//		else if (getGame().getSpot().getMarker() == Marker.BEAR) {
-//			Math.floor(getGame().getSnake().getBody().length);
-//			if (getGame().getSnake().getBody().length < 5) {
-//				// Switch to gameoverscene
-//			}
-//		}
-//		else if (getGame().getSpot().getMarker() == Marker.MOUSE) {
-//			getGame().getSnake().setBody(new BodyPart[5]);
-//			// dit maal 5
-//		}
-//	}
-	
 	public DrawPane getBoard() {
 		return board;
 	}
 	
-	public DashBoard getSettings() {
-		return setting;
-	}
-	
 	public GameOverScene getEndScreen() {
 		return endScreen;
+	}
+	
+	public DashBoard getSettings() {
+		return setting;
 	}
 	
 	public Game getGame() {

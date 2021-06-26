@@ -78,6 +78,21 @@ public class Snake {
 		return null;
 	}
 	
+	public boolean hitSelf() {
+		boolean response = false;
+		for (int i = 0; i < body.size(); i++) {
+			if (positionX == body.get(i).getPositionX() && positionY == body.get(i).getPositionY()) {
+				response = true;
+			}
+		}
+		
+		return response;
+	}
+	
+	public int getSize() {
+		return body.size();
+	}
+	
 	public int getSpeed() {
 		return speed;
 	}
