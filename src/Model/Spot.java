@@ -1,15 +1,11 @@
 package Model;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class Spot {
 
 	private final int MAX_X = 19;
 	private final int MAX_Y = 15;
-	private final List<Marker> TYPES = Collections.unmodifiableList(Arrays.asList());
 	
 	private Marker marker;
 	private Random random;
@@ -17,10 +13,11 @@ public class Spot {
 	private int positionX;
 	private int positionY;
 	
-	public Spot() {
+	public Spot(Marker marker) {
+		this.marker = marker;
+		random = new Random();
 		positionX = random.nextInt(MAX_X);
 		positionY = random.nextInt(MAX_Y);
-		marker = TYPES.get(random.nextInt(TYPES.size()));
 	}
 	
 	public int getPositionX() {

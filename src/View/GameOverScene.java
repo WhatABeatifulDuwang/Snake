@@ -2,36 +2,44 @@ package View;
 
 import Controller.GameController;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class GameOverScene extends VBox{
+public class GameOverScene extends Scene{
 
 	private final static int FONTSIZE = 50;
 	private final static Font FONT = new Font("Arial", FONTSIZE);
 	
+	private GameController controller;
+	
 	public GameOverScene(GameController controller) {
-		this.setAlignment(Pos.CENTER);
-		this.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
-		createTextLabel();
-		createTimerLabel();
+		super(new Pane());
+		this.controller = controller;
+		VBox pane = new VBox();
+		pane.setAlignment(Pos.CENTER);
+		pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+		pane.getChildren().add(createTextLabel());
+		pane.getChildren().add(createTimerLabel());
 	}
 	
-	public void createTextLabel() {
+	public Label createTextLabel() {
 		Label gameOver = new Label("GAME OVER");
 		gameOver.setFont(FONT);
 		
-		this.getChildren().add(gameOver);
+		return gameOver;
 	}
 	
-	public void createTimerLabel() {
+	public Label createTimerLabel() {
 		Label timerLabel = new Label("Timer");
 		timerLabel.setFont(FONT);
+		timerLabel.setText(controller.getSettings().getEndTime());
 		
-		this.getChildren().add(timerLabel);
+		return timerLabel;
 	}
 }

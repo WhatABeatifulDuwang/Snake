@@ -11,10 +11,12 @@ public class GameController {
 	private DashBoard setting;
 	private GameOverScene endScreen;
 	
+	private MainController mainCtrl;
 	private GameEngine engine;
 	private Game game;
 	
-	public GameController() {
+	public GameController(MainController mainCtrl) {
+		this.mainCtrl = mainCtrl;
 		game = new Game();
 		board = new DrawPane(this);
 		setting = new DashBoard(this);
@@ -48,5 +50,9 @@ public class GameController {
 	
 	public Game getGame() {
 		return game;
+	}
+	
+	public void gameOver() {
+		mainCtrl.switchToGameOver();
 	}
 }

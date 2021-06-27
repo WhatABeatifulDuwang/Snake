@@ -1,5 +1,7 @@
 package View;
 
+import java.util.ArrayList;
+
 import Controller.GameController;
 import Model.BodyPart;
 import Model.Game;
@@ -42,9 +44,11 @@ public class DrawPane extends GridPane{
 				if (game != null) {
 					drawSnakeHead(game.getSnake(), x, y);					
 					drawSnakeBodyPart(game.getSnake().getBodyPart(x, y), x, y);
-					drawRandomSpot(game.getSpot());
 				}				
 			}
+		}
+		if (game != null) {
+			drawRandomSpot(game.getAllSpotList());			
 		}
 	}
 	
@@ -65,28 +69,33 @@ public class DrawPane extends GridPane{
 	
 	private void drawSnakeBodyPart(BodyPart body, int x, int y) {
 		if (body == null) return;
-//		if (body.isPosition(x, y)) return;
 		
 		Circle bodyPart = new Circle(CIRCLE_X, CIRCLE_Y, CIRCLESIZE);
 		bodyPart.setFill(Color.YELLOW);			
 		this.add(bodyPart, x, y);
 	}
 	
-	private void drawRandomSpot(Spot spot) {
-		if (spot == null) return;
+	private void drawRandomSpot(ArrayList<Spot> spots) {
+		if (spots == null) return;
 		
-		ImageView randomSpot = new ImageView();
-		if (spot.getMarker() == Marker.FIRE) {
-			randomSpot.setImage(new Image("/Resources/images/fire.png"));
+		Image image = null;
+		for (int i = 0; i < spots.size(); i++) {
+			ImageView randomSpot = new ImageView();
+			if (spots.get(i).getMarker() == Marker.FIRE) {
+				image = new Image("Resources/images/fire.png");
+			}
+			if (spots.get(i).getMarker() == Marker.BEAR) {
+				image = new Image("Resources/images/bear.png");
+			}
+			if (spots.get(i).getMarker() == Marker.MOUSE) {
+				image = new Image("Resources/images/mouse.png");
+			}
+			
+			randomSpot.setImage(image);
+			randomSpot.setFitHeight(SQUARESIZE);
+			randomSpot.setFitWidth(SQUARESIZE);
+			this.add(randomSpot, spots.get(i).getPositionX(), spots.get(i).getPositionY());
 		}
-		if (spot.getMarker() == Marker.BEAR) {
-			randomSpot.setImage(new Image("/Resources/images/bear.png"));
-		}
-		if (spot.getMarker() == Marker.MOUSE) {
-			randomSpot.setImage(new Image("/Resources/images/mouse.png"));
-		}
-		
-		this.add(randomSpot, spot.getPositionX(), spot.getPositionY());
 	}
 	
 	private void drawEmptyCell(int x, int y) {

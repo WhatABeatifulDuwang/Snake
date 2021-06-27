@@ -6,14 +6,15 @@ import javafx.application.Platform;
 
 public class GameEngine implements Runnable {
 
+	private final int START_INTERVAL = 1500;
+	
 	private Thread thread;
-
 	private Game game;
 	private DrawPane view;
 	private GameController controller;
 
 	private boolean isRunning;
-	private int interval = 1000;
+	private int interval = START_INTERVAL;
 
 	public GameEngine(Game game, DrawPane view, GameController controller) {
 		this.game = game;
@@ -30,12 +31,16 @@ public class GameEngine implements Runnable {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
+						if (game.isSnakeDead()) {
+							isRunning = false;
+							controller.gameOver();
+						}
 						game.update();
 						view.update(game);
 					}
 				});
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				isRunning = false;
 			}
 		}
 
@@ -54,6 +59,6 @@ public class GameEngine implements Runnable {
 	}
 	
 	public void setSpeed(int speed) {
-		interval = interval - (speed * 10);
+		interval = START_INTERVAL - (speed * 100);
 	}
 }

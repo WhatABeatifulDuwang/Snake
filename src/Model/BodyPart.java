@@ -2,13 +2,30 @@ package Model;
 
 public class BodyPart {
 
-	private Direction direction;
+	protected Direction direction;
 	
-	private int positionX;
-	private int positionY;
+	protected int positionX;
+	protected int positionY;
 	
 	public BodyPart() {
 		
+	}
+	
+	public void move() {
+		switch(direction) {
+		case UP:
+			positionY--;			
+			break;
+		case RIGHT:
+			positionX++;
+			break;
+		case DOWN:
+			positionY++;
+			break;
+		case LEFT:
+			positionX--;
+			break;
+		}
 	}
 	
 	public int getPositionX() {

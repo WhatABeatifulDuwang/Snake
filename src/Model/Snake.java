@@ -2,27 +2,25 @@ package Model;
 
 import java.util.ArrayList;
 
-public class Snake {
+public class Snake extends BodyPart{
 
 	private final int DEFAULT_START_X = 8;
 	private final int DEFAULT_START_Y = 6;
 	
 	private ArrayList<BodyPart> body;
-	private Direction direction;
 	
 	private int amountOfBodyParts;
-	private int positionX;
-	private int positionY;
 	private int speed;
 	
 	public Snake() {
+		super();
 		positionX = DEFAULT_START_X;
 		positionY = DEFAULT_START_Y;
 		direction = Direction.RIGHT;
 		amountOfBodyParts = 4;
 		body = new ArrayList<BodyPart>(); 
 		
-		for (int i = 0; i <= amountOfBodyParts; i++) {			
+		for (int i = 1; i <= amountOfBodyParts; i++) {			
 			BodyPart startPart = new BodyPart();
 			startPart.setPositionX(positionX - i); 
 			startPart.setPositionY(positionY);
@@ -31,32 +29,23 @@ public class Snake {
 		}
 	}
 	
+	@Override
 	public void move() {
-		
-		switch(direction) {
-		case UP:
-			positionY--;			
-			moveBody(positionX, positionY + 1);
-			break;
-		case RIGHT:
-			positionX++;
-			moveBody(positionX - 1, positionY);
-			break;
-		case DOWN:
-			positionY++;
-			moveBody(positionX, positionY - 1);
-			break;
-		case LEFT:
-			positionX--;
-			moveBody(positionX + 1, positionY);
-			break;
-		}
+		super.move();
+		moveAllBodyParts();
 	}
 	
-	public void moveBody(int x, int y) {
-		for (int i = 0; i <= amountOfBodyParts; i++) {				
-			body.get(i).setPositionX(x);
-			body.get(i).setPositionY(y);
+	public void moveAllBodyParts() {
+		Direction nextDirection = direction;
+		for (int i = body.size() - 1; i >= 0; i--) {		
+			body.get(i).move();
+			
+			if (i != 0) {
+				nextDirection = body.get(i - 1).getDirection();
+			} else {
+				nextDirection = direction;
+			}
+			body.get(i).setDirection(nextDirection);
 		}
 	}
 	

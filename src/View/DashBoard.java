@@ -4,8 +4,6 @@ import Controller.GameController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,14 +21,18 @@ public class DashBoard extends HBox{
 	private final int SLIDERMIN = 1;
 	private final int SLIDERMAX = 12;
 	private final int SPACING = 20;
+	private final int MAX_SPEED = 12;
 		
 	private int min;
 	private int sec;
 	private int ms;
-	private int speedValue;
+	private int order;
+	private int speedValue = 1;
+	private boolean checkPoint;
 	
 	private Timeline timeline;
 	private Label playTime;
+	private Slider slider;
 	private Button run;
 	private Button exit;
 	private GameController controller;
@@ -76,20 +78,13 @@ public class DashBoard extends HBox{
 	}
 	
 	public void createSpeedSlicer() {
-		Slider slider = new Slider(SLIDERMIN, SLIDERMAX, SLIDERMAX);
+		slider = new Slider(SLIDERMIN, SLIDERMAX, SLIDERMIN);
 		slider.setMinorTickCount(SLIDERMIN);
 		slider.setMajorTickUnit(SLIDERMIN);
 		slider.setShowTickMarks(true);
 		slider.setShowTickLabels(true);
 		slider.setPadding(new Insets(5));
-		slider.valueProperty().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				speedValue = (int) slider.getValue();
-				controller.increaseSpeed(speedValue);
-			}
-		});
+		slider.setDisable(true);
 		
 		this.getChildren().add(slider);
 	}
@@ -109,8 +104,22 @@ public class DashBoard extends HBox{
 				@Override
 				public void handle(ActionEvent event) {
 					setTime();
+					if (sec != 0 && sec % 5 == 0) {
+						if (speedValue < MAX_SPEED && checkPoint) {
+							speedValue = speedValue + 1;
+							slider.setValue(speedValue);
+							controller.increaseSpeed(speedValue);
+							controller.getGame().generateNewSpot(order);;
+							checkPoint = false;
+							order++;
+							if (order == 3) {
+								order = 0;
+							}
+						}
+					}
 				}
-		}));
+			}
+		));
 		
 		timeline.setCycleCount(Timeline.INDEFINITE);
 	}
@@ -119,8 +128,9 @@ public class DashBoard extends HBox{
 		if (ms == 1000) {
 			ms = 0;
 			sec++;
+			checkPoint = true;
 		}
-		
+				
 		if (sec == 60) {
 			sec = 0;
 			min++;
@@ -137,6 +147,10 @@ public class DashBoard extends HBox{
 	
 	public void startTimer() {
 		timeline.play();
+	}
+	
+	public String getEndTime() {
+		return playTime.getText();
 	}
 
 }
