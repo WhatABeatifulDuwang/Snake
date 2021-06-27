@@ -31,8 +31,22 @@ public class Game {
 	}
 	
 	private void checkCollision() {
-		
-		
+		for (int i = 0; i < allSpotList.size(); i++) {		
+			if (snake.getX() == allSpotList.get(i).getPositionX() && snake.getY() == allSpotList.get(i).getPositionY()) {
+				if (allSpotList.get(i).getMarker() == Marker.BEAR) {
+					snake.removeBodyPart();
+					allSpotList.remove(i);
+				}
+				if (allSpotList.get(i).getMarker() == Marker.MOUSE) {
+					int counter = 0;
+					while (counter < 4) {
+						counter++;
+						snake.addBodyPart();
+						allSpotList.remove(i);
+					}
+				}
+			}
+		}
 	}
 
 	public void startSpot() {

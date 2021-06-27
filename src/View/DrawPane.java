@@ -18,7 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-public class DrawPane extends GridPane{
+public class DrawPane extends GridPane {
 
 	private final int MAX_ROWS = 15;
 	private final int MAX_COLS = 19;
@@ -26,57 +26,61 @@ public class DrawPane extends GridPane{
 	private final int PREFHEIGHT = 600;
 	private final int SQUARESIZE = 40;
 	private final int CIRCLESIZE = 20;
-    private final int CIRCLE_X = (PREFWIDTH - CIRCLESIZE) / 2;
-    private final int CIRCLE_Y = (PREFHEIGHT - CIRCLESIZE) / 2;
-	
+	private final int CIRCLE_X = (PREFWIDTH - CIRCLESIZE) / 2;
+	private final int CIRCLE_Y = (PREFHEIGHT - CIRCLESIZE) / 2;
+
 	public DrawPane(GameController controller) {
 		this.setPrefSize(PREFWIDTH, PREFHEIGHT);
 		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
 		draw(null);
 	}
-	
+
 	public void draw(Game game) {
 		for (int x = 0; x < MAX_COLS; x++) {
 			for (int y = 0; y < MAX_ROWS; y++) {
 				drawEmptyCell(x, y);
-				
+
 				if (game != null) {
-					drawSnakeHead(game.getSnake(), x, y);					
+					drawSnakeHead(game.getSnake(), x, y);
 					drawSnakeBodyPart(game.getSnake().getBodyPart(x, y), x, y);
-				}				
+				}
 			}
 		}
 		if (game != null) {
-			drawRandomSpot(game.getAllSpotList());			
+			drawRandomSpot(game.getAllSpotList());
 		}
 	}
-	
+
 	public void update(Game game) {
 		this.getChildren().clear();
 		draw(game);
 	}
-	
+
 	private void drawSnakeHead(Snake snake, int x, int y) {
-		if (snake == null) return;
-		if (!snake.isHead(x, y)) return;
-		
+		if (snake == null)
+			return;
+		if (!snake.isHead(x, y))
+			return;
+
 		Circle head = new Circle(CIRCLE_X, CIRCLE_Y, CIRCLESIZE);
-		head.setFill(Color.RED);	
-		
+		head.setFill(Color.RED);
+
 		this.add(head, x, y);
 	}
-	
+
 	private void drawSnakeBodyPart(BodyPart body, int x, int y) {
-		if (body == null) return;
-		
+		if (body == null)
+			return;
+
 		Circle bodyPart = new Circle(CIRCLE_X, CIRCLE_Y, CIRCLESIZE);
-		bodyPart.setFill(Color.YELLOW);			
+		bodyPart.setFill(Color.YELLOW);
 		this.add(bodyPart, x, y);
 	}
-	
+
 	private void drawRandomSpot(ArrayList<Spot> spots) {
-		if (spots == null) return;
-		
+		if (spots == null)
+			return;
+
 		Image image = null;
 		for (int i = 0; i < spots.size(); i++) {
 			ImageView randomSpot = new ImageView();
@@ -89,22 +93,22 @@ public class DrawPane extends GridPane{
 			if (spots.get(i).getMarker() == Marker.MOUSE) {
 				image = new Image("Resources/images/mouse.png");
 			}
-			
+
 			randomSpot.setImage(image);
 			randomSpot.setFitHeight(SQUARESIZE);
 			randomSpot.setFitWidth(SQUARESIZE);
-			
+
 			this.add(randomSpot, spots.get(i).getPositionX(), spots.get(i).getPositionY());
 		}
 	}
-	
+
 	private void drawEmptyCell(int x, int y) {
 		Rectangle square = new Rectangle();
 		square.setHeight(SQUARESIZE);
 		square.setWidth(SQUARESIZE);
 		if (x % 2 == 0 && y % 2 == 0) {
-			square.setFill(Color.DARKGRAY);					
-		} 
+			square.setFill(Color.DARKGRAY);
+		}
 		if (x % 2 == 0 && y % 2 != 0) {
 			square.setFill(Color.GRAY);
 		}

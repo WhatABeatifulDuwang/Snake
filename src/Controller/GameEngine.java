@@ -7,7 +7,7 @@ import javafx.application.Platform;
 public class GameEngine implements Runnable {
 
 	private final int START_INTERVAL = 1500;
-	
+
 	private Thread thread;
 	private Game game;
 	private DrawPane view;
@@ -59,7 +59,8 @@ public class GameEngine implements Runnable {
 	public void stop() {
 		isRunning = false;
 	}
-	
+
+	// sets interval speed based on speedvalue from slider
 	public void setSpeed(int speed) {
 		interval = START_INTERVAL - (speed * 100);
 	}

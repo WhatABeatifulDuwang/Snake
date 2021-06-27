@@ -14,7 +14,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
-public class DashBoard extends HBox{
+public class DashBoard extends HBox {
 
 	private final int PREFWIDTH = 760;
 	private final int PREFHEIGHT = 50;
@@ -22,7 +22,7 @@ public class DashBoard extends HBox{
 	private final int SLIDERMAX = 12;
 	private final int SPACING = 20;
 	private final int MAX_SPEED = 12;
-		
+
 	private int min;
 	private int sec;
 	private int ms;
@@ -30,14 +30,14 @@ public class DashBoard extends HBox{
 	private int speedValue = 1;
 	private boolean checkPoint;
 	private String endTime;
-	
+
 	private Timeline timeline;
 	private Label playTime;
 	private Slider slider;
 	private Button run;
 	private Button exit;
 	private GameController controller;
-	
+
 	public DashBoard(GameController controller) {
 		this.controller = controller;
 		this.setPrefSize(PREFWIDTH, PREFHEIGHT);
@@ -49,7 +49,7 @@ public class DashBoard extends HBox{
 		createSpeedSlicer();
 		createPlaytimeLabel();
 	}
-	
+
 	public void createPauseButton() {
 		run = new Button("Start");
 		run.setOnAction(e -> {
@@ -58,26 +58,26 @@ public class DashBoard extends HBox{
 
 		this.getChildren().add(run);
 	}
-	
+
 	private void switchText() {
 		if (run.getText().equals("Start")) {
 			startTimer();
 			controller.startGame();
-			run.setText("Pause");			
-		} else  {
+			run.setText("Pause");
+		} else {
 			pauseTimer();
 			controller.pauseGame();
 			run.setText("Start");
 		}
 	}
-	
+
 	public void createExitButton() {
 		exit = new Button("Exit");
 		exit.setOnAction(e -> Platform.exit());
-		
+
 		this.getChildren().add(exit);
 	}
-	
+
 	public void createSpeedSlicer() {
 		slider = new Slider(SLIDERMIN, SLIDERMAX, SLIDERMIN);
 		slider.setMinorTickCount(SLIDERMIN);
@@ -86,76 +86,74 @@ public class DashBoard extends HBox{
 		slider.setShowTickLabels(true);
 		slider.setPadding(new Insets(5));
 		slider.setDisable(true);
-		
+
 		this.getChildren().add(slider);
 	}
-	
+
 	public void createPlaytimeLabel() {
 		playTime = new Label();
 		playTime.setText("00:00:000");
-		
+
 		this.getChildren().add(playTime);
 	}
-	
-	public void createTimer() {
-		timeline = new Timeline(
-			new KeyFrame(Duration.millis(1), 
-			new EventHandler<ActionEvent>() {
 
-				@Override
-				public void handle(ActionEvent event) {
-					setTime();
-					if (sec != 0 && sec % 5 == 0) {
-						if (speedValue < MAX_SPEED && checkPoint) {
-							speedValue = speedValue + 1;
-							slider.setValue(speedValue);
-							controller.increaseSpeed(speedValue);
-							controller.getGame().generateNewSpot(order);
-							controller.generateBodyPart();
-							checkPoint = false;
-							order++;
-							if (order == 3) {
-								order = 0;
-							}
+	// creates a timer which tracks the time and calls some methods every 5 seconds
+	public void createTimer() {
+		timeline = new Timeline(new KeyFrame(Duration.millis(1), new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				setTime();
+				if (sec != 0 && sec % 5 == 0) {
+					if (speedValue < MAX_SPEED && checkPoint) {
+						speedValue = speedValue + 1;
+						slider.setValue(speedValue);
+						controller.increaseSpeed(speedValue);
+						controller.getGame().generateNewSpot(order);
+						controller.generateBodyPart();
+						checkPoint = false;
+						order++;
+						if (order == 3) {
+							order = 0;
 						}
 					}
 				}
 			}
-		));
-		
+		}));
+
 		timeline.setCycleCount(Timeline.INDEFINITE);
 	}
-			
+
+	// converts time to string for playtime label
 	public void setTime() {
 		if (ms == 1000) {
 			ms = 0;
 			sec++;
 			checkPoint = true;
 		}
-				
+
 		if (sec == 60) {
 			sec = 0;
 			min++;
 		}
-		
-		playTime.setText((((min / 10) == 0) ? "0" : "") + min + ":"
-				 + (((sec / 10) == 0) ? "0" : "") + sec + ":" 
-					+ (((ms / 10) == 0) ? "00" : (((ms / 100) == 0) ? "0" : "")) + ms++);
+
+		playTime.setText((((min / 10) == 0) ? "0" : "") + min + ":" + (((sec / 10) == 0) ? "0" : "") + sec + ":"
+				+ (((ms / 10) == 0) ? "00" : (((ms / 100) == 0) ? "0" : "")) + ms++);
 		setEndTime(playTime.getText());
 	}
-	
+
 	public void pauseTimer() {
 		timeline.stop();
 	}
-	
+
 	public void startTimer() {
 		timeline.play();
 	}
-	
+
 	public void setEndTime(String input) {
 		endTime = input;
 	}
-	
+
 	public String getEndTime() {
 		return endTime;
 	}

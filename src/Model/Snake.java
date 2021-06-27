@@ -73,6 +73,14 @@ public class Snake extends BodyPart{
 		body.add(newBodyPart);
 	}
 	
+	public void removeBodyPart() {
+		double divided = (body.size() + 1) / 2;
+		double result = Math.floor(divided);
+		for (int i = body.size() - 1; i > result; i--) {
+			body.remove(i);			
+		}
+	}
+	
 	public boolean isHead(int x, int y) {
 		if (positionX == x && positionY == y) {
 			return true;
