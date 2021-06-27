@@ -29,6 +29,7 @@ public class DashBoard extends HBox{
 	private int order;
 	private int speedValue = 1;
 	private boolean checkPoint;
+	private String endTime;
 	
 	private Timeline timeline;
 	private Label playTime;
@@ -109,7 +110,8 @@ public class DashBoard extends HBox{
 							speedValue = speedValue + 1;
 							slider.setValue(speedValue);
 							controller.increaseSpeed(speedValue);
-							controller.getGame().generateNewSpot(order);;
+							controller.getGame().generateNewSpot(order);
+//							controller.getGame().getSnake().addBodyPart();
 							checkPoint = false;
 							order++;
 							if (order == 3) {
@@ -136,9 +138,10 @@ public class DashBoard extends HBox{
 			min++;
 		}
 		
-		playTime.setText((((min/10) == 0) ? "0" : "") + min + ":"
-				 + (((sec/10) == 0) ? "0" : "") + sec + ":" 
-					+ (((ms/10) == 0) ? "00" : (((ms/100) == 0) ? "0" : "")) + ms++);
+		playTime.setText((((min / 10) == 0) ? "0" : "") + min + ":"
+				 + (((sec / 10) == 0) ? "0" : "") + sec + ":" 
+					+ (((ms / 10) == 0) ? "00" : (((ms / 100) == 0) ? "0" : "")) + ms++);
+		setEndTime(playTime.getText());
 	}
 	
 	public void pauseTimer() {
@@ -149,8 +152,11 @@ public class DashBoard extends HBox{
 		timeline.play();
 	}
 	
-	public String getEndTime() {
-		return playTime.getText();
+	public void setEndTime(String input) {
+		endTime = input;
 	}
-
+	
+	public String getEndTime() {
+		return endTime;
+	}
 }

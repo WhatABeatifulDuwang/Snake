@@ -17,7 +17,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 public class DrawPane extends GridPane{
 
@@ -94,13 +93,13 @@ public class DrawPane extends GridPane{
 			randomSpot.setImage(image);
 			randomSpot.setFitHeight(SQUARESIZE);
 			randomSpot.setFitWidth(SQUARESIZE);
+			
 			this.add(randomSpot, spots.get(i).getPositionX(), spots.get(i).getPositionY());
 		}
 	}
 	
 	private void drawEmptyCell(int x, int y) {
 		Rectangle square = new Rectangle();
-		Text text = new Text(x + ", " + y);
 		square.setHeight(SQUARESIZE);
 		square.setWidth(SQUARESIZE);
 		if (x % 2 == 0 && y % 2 == 0) {
@@ -117,6 +116,5 @@ public class DrawPane extends GridPane{
 		}
 
 		this.add(square, x, y);
-		this.add(text, x, y);
 	}
 }

@@ -4,23 +4,22 @@ import Model.Game;
 import View.DashBoard;
 import View.DrawPane;
 import View.GameOverScene;
+import javafx.scene.Scene;
 
 public class GameController {
-
+	
 	private DrawPane board;
 	private DashBoard setting;
 	private GameOverScene endScreen;
+	private Scene gameScene;
 	
-	private MainController mainCtrl;
 	private GameEngine engine;
 	private Game game;
 	
-	public GameController(MainController mainCtrl) {
-		this.mainCtrl = mainCtrl;
+	public GameController() {
 		game = new Game();
 		board = new DrawPane(this);
 		setting = new DashBoard(this);
-		endScreen = new GameOverScene(this);
 		engine = new GameEngine(game, board, this);
 	}
 	
@@ -53,6 +52,10 @@ public class GameController {
 	}
 	
 	public void gameOver() {
-		mainCtrl.switchToGameOver();
+		gameScene.setRoot(new GameOverScene(this));
+	}
+	
+	public void setGameScene(Scene scene) {
+		gameScene = scene;
 	}
 }

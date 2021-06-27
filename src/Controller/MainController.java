@@ -1,15 +1,11 @@
 package Controller;
 
-import View.GameOverScene;
 import View.GameScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainController extends Application{
-
-	private Stage stage;
-	private GameController game;
 	
 	public static void startUp(String[] args) {
 		launch(args);
@@ -18,17 +14,11 @@ public class MainController extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("PROG4 ASS Snake Ody Chen");
-		game = new GameController(this);
+		GameController game = new GameController();
 		Scene gameScene = new GameScene(game);
+		game.setGameScene(gameScene);
 		primaryStage.setScene(gameScene);
 		primaryStage.setResizable(false);
-		this.stage = primaryStage;
-		this.stage.show();
-	}
-	
-	public void switchToGameOver() {
-		Scene gameOverScene = new GameOverScene(game);
-		this.stage.setScene(gameOverScene);
-		this.stage.show();
+		primaryStage.show();
 	}
 }

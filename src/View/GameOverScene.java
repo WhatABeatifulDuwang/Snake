@@ -2,7 +2,6 @@ package View;
 
 import Controller.GameController;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -11,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class GameOverScene extends Scene{
+public class GameOverScene extends VBox{
 
 	private final static int FONTSIZE = 50;
 	private final static Font FONT = new Font("Arial", FONTSIZE);
@@ -21,11 +20,10 @@ public class GameOverScene extends Scene{
 	public GameOverScene(GameController controller) {
 		super(new Pane());
 		this.controller = controller;
-		VBox pane = new VBox();
-		pane.setAlignment(Pos.CENTER);
-		pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
-		pane.getChildren().add(createTextLabel());
-		pane.getChildren().add(createTimerLabel());
+		this.setAlignment(Pos.CENTER);
+		this.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+		this.getChildren().add(createTextLabel());
+		this.getChildren().add(createTimerLabel());
 	}
 	
 	public Label createTextLabel() {

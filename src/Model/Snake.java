@@ -49,6 +49,34 @@ public class Snake extends BodyPart{
 		}
 	}
 	
+	public void addBodyPart() {
+		for (int i = 1; i <= body.size(); i++) {
+			if (i == body.size()) {
+				Direction newDirection = body.get(i).getDirection();
+				BodyPart newPart = new BodyPart();
+				if (newDirection == Direction.UP) {
+					newPart.setPositionX(body.get(i).getPositionX()); 
+					newPart.setPositionY(body.get(i).getPositionY() - 1);
+				}
+				if (newDirection == Direction.RIGHT) {
+					newPart.setPositionX(body.get(i).getPositionX() + 1); 
+					newPart.setPositionY(body.get(i).getPositionY());
+				}
+				if (newDirection == Direction.DOWN) {
+					newPart.setPositionX(body.get(i).getPositionX()); 
+					newPart.setPositionY(body.get(i).getPositionY() + 1);
+				}
+				if (newDirection == Direction.LEFT) {
+					newPart.setPositionX(body.get(i).getPositionX() - 1); 
+					newPart.setPositionY(body.get(i).getPositionY());
+				}
+
+				newPart.setDirection(newDirection);
+				body.add(newPart);			
+			}
+		}
+	}
+	
 	public boolean isHead(int x, int y) {
 		if (positionX == x && positionY == y) {
 			return true;

@@ -33,6 +33,8 @@ public class GameEngine implements Runnable {
 					public void run() {
 						if (game.isSnakeDead()) {
 							isRunning = false;
+							thread = null;
+							controller.getSettings().pauseTimer();
 							controller.gameOver();
 						}
 						game.update();
