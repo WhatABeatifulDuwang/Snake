@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Spot {
@@ -18,6 +19,14 @@ public class Spot {
 		random = new Random();
 		positionX = random.nextInt(MAX_X);
 		positionY = random.nextInt(MAX_Y);
+	}
+	
+	public Spot(Marker marker, ArrayList<Integer[]> possibleSpots) {
+		this.marker = marker;
+		random = new Random();
+		int randomNumber = random.nextInt(possibleSpots.size());
+		positionX = possibleSpots.get(randomNumber)[0];
+		positionY = possibleSpots.get(randomNumber)[1];
 	}
 	
 	public int getPositionX() {

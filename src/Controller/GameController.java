@@ -31,6 +31,10 @@ public class GameController {
 		engine.stop();
 	}
 	
+	public void generateBodyPart() {
+		game.getSnake().addBodyPart();
+	}
+	
 	public void increaseSpeed(int speed) {
 		engine.setSpeed(speed);
 	}

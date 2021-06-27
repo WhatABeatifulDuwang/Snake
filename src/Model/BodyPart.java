@@ -7,10 +7,6 @@ public class BodyPart {
 	protected int positionX;
 	protected int positionY;
 	
-	public BodyPart() {
-		
-	}
-	
 	public void move() {
 		switch(direction) {
 		case UP:

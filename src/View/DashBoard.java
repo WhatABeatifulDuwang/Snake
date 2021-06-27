@@ -111,7 +111,7 @@ public class DashBoard extends HBox{
 							slider.setValue(speedValue);
 							controller.increaseSpeed(speedValue);
 							controller.getGame().generateNewSpot(order);
-//							controller.getGame().getSnake().addBodyPart();
+							controller.generateBodyPart();
 							checkPoint = false;
 							order++;
 							if (order == 3) {

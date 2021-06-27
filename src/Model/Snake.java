@@ -32,7 +32,7 @@ public class Snake extends BodyPart{
 	@Override
 	public void move() {
 		super.move();
-		moveAllBodyParts();
+		moveAllBodyParts();			
 	}
 	
 	public void moveAllBodyParts() {
@@ -50,31 +50,27 @@ public class Snake extends BodyPart{
 	}
 	
 	public void addBodyPart() {
-		for (int i = 1; i <= body.size(); i++) {
-			if (i == body.size()) {
-				Direction newDirection = body.get(i).getDirection();
-				BodyPart newPart = new BodyPart();
-				if (newDirection == Direction.UP) {
-					newPart.setPositionX(body.get(i).getPositionX()); 
-					newPart.setPositionY(body.get(i).getPositionY() - 1);
-				}
-				if (newDirection == Direction.RIGHT) {
-					newPart.setPositionX(body.get(i).getPositionX() + 1); 
-					newPart.setPositionY(body.get(i).getPositionY());
-				}
-				if (newDirection == Direction.DOWN) {
-					newPart.setPositionX(body.get(i).getPositionX()); 
-					newPart.setPositionY(body.get(i).getPositionY() + 1);
-				}
-				if (newDirection == Direction.LEFT) {
-					newPart.setPositionX(body.get(i).getPositionX() - 1); 
-					newPart.setPositionY(body.get(i).getPositionY());
-				}
-
-				newPart.setDirection(newDirection);
-				body.add(newPart);			
-			}
+		BodyPart tail = body.get(body.size() - 1);
+		BodyPart newBodyPart = new BodyPart();
+		if (tail.getDirection() == Direction.UP) {
+			newBodyPart.setPositionX(tail.getPositionX());
+			newBodyPart.setPositionY(tail.getPositionY() + 1);
 		}
+		if (tail.getDirection() == Direction.RIGHT) {
+			newBodyPart.setPositionX(tail.getPositionX() - 1);
+			newBodyPart.setPositionY(tail.getPositionY());
+		}
+		if (tail.getDirection() == Direction.DOWN) {
+			newBodyPart.setPositionX(tail.getPositionX());
+			newBodyPart.setPositionY(tail.getPositionY() - 1);
+		}
+		if (tail.getDirection() == Direction.LEFT) {
+			newBodyPart.setPositionX(tail.getPositionX() + 1);
+			newBodyPart.setPositionY(tail.getPositionY());
+		}
+
+		newBodyPart.setDirection(tail.getDirection());
+		body.add(newBodyPart);
 	}
 	
 	public boolean isHead(int x, int y) {
