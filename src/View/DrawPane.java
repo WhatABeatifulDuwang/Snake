@@ -32,7 +32,7 @@ public class DrawPane extends GridPane {
 	public DrawPane(GameController controller) {
 		this.setPrefSize(PREFWIDTH, PREFHEIGHT);
 		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
-		draw(null);
+		draw(controller.getGame());
 	}
 
 	public void draw(Game game) {

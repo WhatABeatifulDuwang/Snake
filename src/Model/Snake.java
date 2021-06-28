@@ -76,7 +76,7 @@ public class Snake extends BodyPart{
 	public void removeBodyPart() {
 		double divided = (body.size() + 1) / 2;
 		double result = Math.floor(divided);
-		for (int i = body.size() - 1; i > result; i--) {
+		for (int i = body.size() - 1; i >= result - 1; i--) {
 			body.remove(i);			
 		}
 	}

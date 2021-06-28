@@ -35,16 +35,28 @@ public class Game {
 			if (snake.getX() == allSpotList.get(i).getPositionX() && snake.getY() == allSpotList.get(i).getPositionY()) {
 				if (allSpotList.get(i).getMarker() == Marker.BEAR) {
 					snake.removeBodyPart();
+					removeSpot(bearList, allSpotList.get(i));
 					allSpotList.remove(i);
+					return;
 				}
 				if (allSpotList.get(i).getMarker() == Marker.MOUSE) {
 					int counter = 0;
 					while (counter < 4) {
 						counter++;
 						snake.addBodyPart();
-						allSpotList.remove(i);
 					}
+					removeSpot(mouseList, allSpotList.get(i));
+					allSpotList.remove(i);
+					return;
 				}
+			}
+		}
+	}
+	
+	private void removeSpot(ArrayList<Spot> spots, Spot spot) {
+		for (int i = 0; i < spots.size(); i++) {
+			if (spots.get(i) == spot) {
+				spots.remove(i);
 			}
 		}
 	}
@@ -61,16 +73,19 @@ public class Game {
 	public void generateNewSpot(int count) {
 		ArrayList<Integer[]> possibleSpots = getAllPossibleSpots();
 		if (count == 0) {
-			mouseList.add(new Spot(Marker.MOUSE, possibleSpots));			
-			allSpotList.addAll(mouseList);
+			Spot spot = new Spot(Marker.MOUSE, possibleSpots);
+			mouseList.add(spot);			
+			allSpotList.add(spot);
 		}
 		if (count == 1) {
-			bearList.add(new Spot(Marker.BEAR, possibleSpots));			
-			allSpotList.addAll(bearList);
+			Spot spot = new Spot(Marker.BEAR, possibleSpots);
+			bearList.add(spot);			
+			allSpotList.add(spot);
 		}
 		if (count == 2) {
-			fireList.add(new Spot(Marker.FIRE, possibleSpots));			
-			allSpotList.addAll(fireList);
+			Spot spot = new Spot(Marker.FIRE, possibleSpots);
+			fireList.add(spot);			
+			allSpotList.add(spot);
 		}		
 	}
 	

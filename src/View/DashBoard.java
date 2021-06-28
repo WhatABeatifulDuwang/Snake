@@ -104,19 +104,19 @@ public class DashBoard extends HBox {
 			@Override
 			public void handle(ActionEvent event) {
 				setTime();
-				if (sec != 0 && sec % 5 == 0) {
-					if (speedValue < MAX_SPEED && checkPoint) {
+				if (sec != 0 && sec % 5 == 0 && checkPoint) {
+					if (speedValue < MAX_SPEED) {
 						speedValue = speedValue + 1;
 						slider.setValue(speedValue);
 						controller.increaseSpeed(speedValue);
-						controller.getGame().generateNewSpot(order);
-						controller.generateBodyPart();
-						checkPoint = false;
-						order++;
-						if (order == 3) {
-							order = 0;
-						}
 					}
+					controller.getGame().generateNewSpot(order);
+					controller.generateBodyPart();
+					order++;
+					if (order == 3) {
+						order = 0;
+					}
+					checkPoint = false;
 				}
 			}
 		}));
