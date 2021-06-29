@@ -23,14 +23,17 @@ public class GameController {
 		engine = new GameEngine(game, board, this);
 	}
 
+	// starts the game engine
 	public void startGame() {
 		engine.start();
 	}
 
+	// pauses the game engine
 	public void pauseGame() {
 		engine.stop();
 	}
 
+	// generates body parts for the snake
 	public void generateBodyPart() {
 		game.getSnake().addBodyPart();
 	}
@@ -56,10 +59,12 @@ public class GameController {
 		return game;
 	}
 
+	// switches to game over scene when conditions are met
 	public void gameOver() {
 		gameScene.setRoot(new GameOverScene(this));
 	}
 
+	// sets the game scene in maincontroller
 	public void setGameScene(Scene scene) {
 		gameScene = scene;
 	}

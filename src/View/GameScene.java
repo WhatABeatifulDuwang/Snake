@@ -23,7 +23,7 @@ public class GameScene extends Scene{
 		setRoot(root);
 	}
 	
-	// keeps track off keyboard input for WASD
+	// keeps track off keyboard input for WASD and arrow keys
 	public void setDirection(GameController controller) {
 		this.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
 			if (key.getCode() == KeyCode.W || key.getCode() == KeyCode.UP) {

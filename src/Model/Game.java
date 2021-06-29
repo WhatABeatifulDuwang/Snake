@@ -23,6 +23,17 @@ public class Game {
 		startSpot();
 	}
 	
+	// initialises first spots
+	public void startSpot() {
+		mouseList.add(new Spot(Marker.MOUSE));
+		bearList.add(new Spot(Marker.BEAR));
+		fireList.add(new Spot(Marker.FIRE));
+		allSpotList.addAll(mouseList);
+		allSpotList.addAll(bearList);
+		allSpotList.addAll(fireList);
+	}
+	
+	// updates game if the dead check condition isn't met
 	public void update() {
 		if (!isSnakeDead()) {
 			snake.move();
@@ -30,6 +41,7 @@ public class Game {
 		}
 	}
 	
+	// checks when snake reaches a special spot and interact with it
 	private void checkCollision() {
 		for (int i = 0; i < allSpotList.size(); i++) {		
 			if (snake.getX() == allSpotList.get(i).getPositionX() && snake.getY() == allSpotList.get(i).getPositionY()) {
@@ -53,67 +65,7 @@ public class Game {
 		}
 	}
 	
-	private void removeSpot(ArrayList<Spot> spots, Spot spot) {
-		for (int i = 0; i < spots.size(); i++) {
-			if (spots.get(i) == spot) {
-				spots.remove(i);
-			}
-		}
-	}
-
-	public void startSpot() {
-		mouseList.add(new Spot(Marker.MOUSE));
-		bearList.add(new Spot(Marker.BEAR));
-		fireList.add(new Spot(Marker.FIRE));
-		allSpotList.addAll(mouseList);
-		allSpotList.addAll(bearList);
-		allSpotList.addAll(fireList);
-	}
-	
-	public void generateNewSpot(int count) {
-		ArrayList<Integer[]> possibleSpots = getAllPossibleSpots();
-		if (count == 0) {
-			Spot spot = new Spot(Marker.MOUSE, possibleSpots);
-			mouseList.add(spot);			
-			allSpotList.add(spot);
-		}
-		if (count == 1) {
-			Spot spot = new Spot(Marker.BEAR, possibleSpots);
-			bearList.add(spot);			
-			allSpotList.add(spot);
-		}
-		if (count == 2) {
-			Spot spot = new Spot(Marker.FIRE, possibleSpots);
-			fireList.add(spot);			
-			allSpotList.add(spot);
-		}		
-	}
-	
-	private ArrayList<Integer[]> getAllPossibleSpots() {
-		ArrayList<Integer[]> possibleSpots = new ArrayList<Integer[]>();
-		for (int y = 0; y < 15; y++) {
-			for (int x = 0; x < 19; x++) {
-				if (snake.isHead(x, y)) {
-					continue;
-				}
-				if (snake.getBodyPart(x, y) != null) {
-					continue;
-				}
-				if (getSpot(x, y) != null) {
-					continue;
-				}
-				
-				possibleSpots.add(new Integer[] {x, y});				
-			}
-		}
-		
-		return possibleSpots;
-	}
-
-	public ArrayList<Spot> getAllSpotList() {
-		return allSpotList;
-	}
-	
+	// check condition if the snake is dead
 	public boolean isSnakeDead() {
 		boolean answer = false;
 		
@@ -140,6 +92,61 @@ public class Game {
 		}
 		
 		return answer;
+	}
+	
+	// creates new spots
+	public void generateNewSpot(int count) {
+		ArrayList<Integer[]> possibleSpots = getAllPossibleSpots();
+		if (count == 0) {
+			Spot spot = new Spot(Marker.MOUSE, possibleSpots);
+			mouseList.add(spot);			
+			allSpotList.add(spot);
+		}
+		if (count == 1) {
+			Spot spot = new Spot(Marker.BEAR, possibleSpots);
+			bearList.add(spot);			
+			allSpotList.add(spot);
+		}
+		if (count == 2) {
+			Spot spot = new Spot(Marker.FIRE, possibleSpots);
+			fireList.add(spot);			
+			allSpotList.add(spot);
+		}		
+	}
+	
+	// checks the placement for the spots so it wouldn't spawn on the snake or an existing spot
+	private ArrayList<Integer[]> getAllPossibleSpots() {
+		ArrayList<Integer[]> possibleSpots = new ArrayList<Integer[]>();
+		for (int y = 0; y < 15; y++) {
+			for (int x = 0; x < 19; x++) {
+				if (snake.isHead(x, y)) {
+					continue;
+				}
+				if (snake.getBodyPart(x, y) != null) {
+					continue;
+				}
+				if (getSpot(x, y) != null) {
+					continue;
+				}
+				
+				possibleSpots.add(new Integer[] {x, y});				
+			}
+		}
+		
+		return possibleSpots;
+	}
+
+	public ArrayList<Spot> getAllSpotList() {
+		return allSpotList;
+	}
+	
+	// removes special spot from the game
+	private void removeSpot(ArrayList<Spot> spots, Spot spot) {
+		for (int i = 0; i < spots.size(); i++) {
+			if (spots.get(i) == spot) {
+				spots.remove(i);
+			}
+		}
 	}
 	
 	public Spot getSpot(int x, int y) {

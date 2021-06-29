@@ -8,10 +8,12 @@ public class GameEngine implements Runnable {
 
 	private final int START_INTERVAL = 1500;
 
+	private DrawPane view;
+	
+	private GameController controller;
+	
 	private Thread thread;
 	private Game game;
-	private DrawPane view;
-	private GameController controller;
 
 	private boolean isRunning;
 	private int interval = START_INTERVAL;
@@ -49,6 +51,7 @@ public class GameEngine implements Runnable {
 		thread = null;
 	}
 
+	// creates a new thread if it doesn't exist and starts the thread
 	public void start() {
 		if (thread == null) {
 			thread = new Thread(this);
@@ -56,6 +59,7 @@ public class GameEngine implements Runnable {
 		}
 	}
 
+	// stops the thread
 	public void stop() {
 		isRunning = false;
 	}

@@ -36,6 +36,7 @@ public class DashBoard extends HBox {
 	private Slider slider;
 	private Button run;
 	private Button exit;
+	
 	private GameController controller;
 
 	public DashBoard(GameController controller) {
@@ -53,13 +54,13 @@ public class DashBoard extends HBox {
 	public void createPauseButton() {
 		run = new Button("Start");
 		run.setOnAction(e -> {
-			switchText();
+			switchButtons();
 		});
 
 		this.getChildren().add(run);
 	}
 
-	private void switchText() {
+	private void switchButtons() {
 		if (run.getText().equals("Start")) {
 			startTimer();
 			controller.startGame();

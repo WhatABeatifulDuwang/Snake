@@ -10,7 +10,6 @@ public class Snake extends BodyPart{
 	private ArrayList<BodyPart> body;
 	
 	private int amountOfBodyParts;
-	private int speed;
 	
 	public Snake() {
 		super();
@@ -35,6 +34,28 @@ public class Snake extends BodyPart{
 		moveAllBodyParts();			
 	}
 	
+	// checks if the given position is the head of the snake
+	public boolean isHead(int x, int y) {
+		if (positionX == x && positionY == y) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	// checks if the snake hits it's own body
+	public boolean hitSelf() {
+		boolean response = false;
+		for (int i = 0; i < body.size(); i++) {
+			if (positionX == body.get(i).getPositionX() && positionY == body.get(i).getPositionY()) {
+				response = true;
+			}
+		}
+		
+		return response;
+	}
+	
+	// moves the whole body along with the head
 	public void moveAllBodyParts() {
 		Direction nextDirection = direction;
 		for (int i = body.size() - 1; i >= 0; i--) {		
@@ -49,6 +70,7 @@ public class Snake extends BodyPart{
 		}
 	}
 	
+	// adds a new body part to the snake
 	public void addBodyPart() {
 		BodyPart tail = body.get(body.size() - 1);
 		BodyPart newBodyPart = new BodyPart();
@@ -73,20 +95,13 @@ public class Snake extends BodyPart{
 		body.add(newBodyPart);
 	}
 	
+	// removes the body part
 	public void removeBodyPart() {
 		double divided = (body.size() + 1) / 2;
 		double result = Math.floor(divided);
 		for (int i = body.size() - 1; i >= result - 1; i--) {
 			body.remove(i);			
 		}
-	}
-	
-	public boolean isHead(int x, int y) {
-		if (positionX == x && positionY == y) {
-			return true;
-		}
-		
-		return false;
 	}
 	
 	public BodyPart getBodyPart(int x, int y) {
@@ -98,40 +113,13 @@ public class Snake extends BodyPart{
 		
 		return null;
 	}
-	
-	public boolean hitSelf() {
-		boolean response = false;
-		for (int i = 0; i < body.size(); i++) {
-			if (positionX == body.get(i).getPositionX() && positionY == body.get(i).getPositionY()) {
-				response = true;
-			}
-		}
 		
-		return response;
-	}
-	
 	public int getSize() {
 		return body.size();
 	}
 	
-	public int getSpeed() {
-		return speed;
-	}
-	
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
-	
-	public void setX(int positionX) {
-		this.positionX = positionX;
-	}
-	
 	public int getX() {
 		return positionX;
-	}
-	
-	public void setY(int positionY) {
-		this.positionY = positionY;
 	}
 	
 	public int getY() {
