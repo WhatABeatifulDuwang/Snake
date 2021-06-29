@@ -18,6 +18,7 @@ public class DashBoard extends HBox {
 
 	private final int PREFWIDTH = 760;
 	private final int PREFHEIGHT = 50;
+	private final int SLIDERWIDTH = 250;
 	private final int SLIDERMIN = 1;
 	private final int SLIDERMAX = 12;
 	private final int SPACING = 20;
@@ -81,11 +82,11 @@ public class DashBoard extends HBox {
 
 	public void createSpeedSlicer() {
 		slider = new Slider(SLIDERMIN, SLIDERMAX, SLIDERMIN);
+		slider.setMinWidth(SLIDERWIDTH);
 		slider.setMinorTickCount(SLIDERMIN);
 		slider.setMajorTickUnit(SLIDERMIN);
 		slider.setShowTickMarks(true);
 		slider.setShowTickLabels(true);
-		slider.setPadding(new Insets(5));
 		slider.setDisable(true);
 
 		this.getChildren().add(slider);

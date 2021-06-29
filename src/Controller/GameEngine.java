@@ -64,7 +64,7 @@ public class GameEngine implements Runnable {
 		isRunning = false;
 	}
 
-	// sets interval speed based on speedvalue from slider
+	// sets interval speed based on speed value from slider
 	public void setSpeed(int speed) {
 		interval = START_INTERVAL - (speed * 100);
 	}

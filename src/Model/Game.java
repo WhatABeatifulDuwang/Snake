@@ -25,9 +25,10 @@ public class Game {
 	
 	// initialises first spots
 	public void startSpot() {
-		mouseList.add(new Spot(Marker.MOUSE));
-		bearList.add(new Spot(Marker.BEAR));
-		fireList.add(new Spot(Marker.FIRE));
+		ArrayList<Integer[]> possibleSpots = getAllPossibleSpots();
+		mouseList.add(new Spot(Marker.MOUSE, possibleSpots));
+		bearList.add(new Spot(Marker.BEAR, possibleSpots));
+		fireList.add(new Spot(Marker.FIRE, possibleSpots));
 		allSpotList.addAll(mouseList);
 		allSpotList.addAll(bearList);
 		allSpotList.addAll(fireList);

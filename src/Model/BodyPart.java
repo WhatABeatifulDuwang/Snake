@@ -7,7 +7,7 @@ public class BodyPart {
 	protected int positionX;
 	protected int positionY;
 	
-	// moves the bodypart position based on direction
+	// moves the body part position based on direction
 	public void move() {
 		switch(direction) {
 		case UP:

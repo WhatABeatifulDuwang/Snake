@@ -4,22 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Spot {
-
-	private final int MAX_X = 19;
-	private final int MAX_Y = 15;
 	
 	private Marker marker;
 	private Random random;
 	
 	private int positionX;
 	private int positionY;
-	
-	public Spot(Marker marker) {
-		this.marker = marker;
-		random = new Random();
-		positionX = random.nextInt(MAX_X);
-		positionY = random.nextInt(MAX_Y);
-	}
 	
 	public Spot(Marker marker, ArrayList<Integer[]> possibleSpots) {
 		this.marker = marker;
