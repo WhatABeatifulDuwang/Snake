@@ -42,30 +42,6 @@ public class Game {
 		}
 	}
 	
-	// checks when snake reaches a special spot and interact with it
-	private void checkCollision() {
-		for (int i = 0; i < allSpotList.size(); i++) {		
-			if (snake.getX() == allSpotList.get(i).getPositionX() && snake.getY() == allSpotList.get(i).getPositionY()) {
-				if (allSpotList.get(i).getMarker() == Marker.BEAR) {
-					snake.removeBodyPart();
-					removeSpot(bearList, allSpotList.get(i));
-					allSpotList.remove(i);
-					return;
-				}
-				if (allSpotList.get(i).getMarker() == Marker.MOUSE) {
-					int counter = 0;
-					while (counter < 4) {
-						counter++;
-						snake.addBodyPart();
-					}
-					removeSpot(mouseList, allSpotList.get(i));
-					allSpotList.remove(i);
-					return;
-				}
-			}
-		}
-	}
-	
 	// check condition if the snake is dead
 	public boolean isSnakeDead() {
 		boolean answer = false;
@@ -85,7 +61,7 @@ public class Game {
 					answer = true;
 				}
 				if (allSpotList.get(i).getMarker() == Marker.BEAR) {
-					if (snake.getSize() < 5) {
+					if ((snake.getSize() + 1) < 5) {
 						answer = true;
 					}
 				}
@@ -93,6 +69,32 @@ public class Game {
 		}
 		
 		return answer;
+	}
+	
+	// checks when snake reaches a special spot and interact with it
+	private void checkCollision() {
+		for (int i = 0; i < allSpotList.size(); i++) {		
+			if (snake.getX() == allSpotList.get(i).getPositionX() && snake.getY() == allSpotList.get(i).getPositionY()) {
+				if (allSpotList.get(i).getMarker() == Marker.BEAR) {
+					if ((snake.getSize() + 1) >= 5) {						
+						snake.removeBodyPart();
+						removeSpot(bearList, allSpotList.get(i));
+						allSpotList.remove(i);
+						return;
+					}
+				}
+				if (allSpotList.get(i).getMarker() == Marker.MOUSE) {
+					int counter = 0;
+					while (counter < 5) {
+						counter++;
+						snake.addBodyPart();
+					}
+					removeSpot(mouseList, allSpotList.get(i));
+					allSpotList.remove(i);
+					return;
+				}
+			}
+		}
 	}
 	
 	// creates new spots
